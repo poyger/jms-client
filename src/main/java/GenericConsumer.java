@@ -6,7 +6,7 @@ import javax.naming.NamingException;
 public class GenericConsumer {
 
     // Name of the queue we will receive messages from
-    private static String subject = "GENERICQ";
+    private static String subject = "/queues/poyantesting";
 
     public static void main(String[] args) throws JMSException, NamingException {
         Context jndiContext = new InitialContext();
@@ -20,8 +20,7 @@ public class GenericConsumer {
         Session session = connection.createSession(false,
                 Session.AUTO_ACKNOWLEDGE);
 
-        // Getting the queue 'TESTQUEUE'
-        Destination destination = session.createQueue(subject);
+        Destination destination = (Destination) jndiContext.lookup(subject);
 
         // MessageConsumer is used for receiving (consuming) messages
         MessageConsumer consumer = session.createConsumer(destination);

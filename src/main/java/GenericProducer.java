@@ -6,7 +6,7 @@ import javax.naming.NamingException;
 public class GenericProducer {
 
     // Name of the queue we will be sending messages to
-    private static String subject = "dynamicQueues/FOO.BAR";
+    private static String subject = "dynamicQueues/ActiveMQ";
 
     public static void main(String[] args) throws JMSException, NamingException {
         Context jndiContext = new InitialContext();
@@ -24,7 +24,7 @@ public class GenericProducer {
         // Destination represents here our queue 'TESTQUEUE' on the
         // JMS server. You don't have to do anything special on the
         // server to create it, it will be created automatically.
-        Destination destination = (Destination) jndiContext.lookup(subject);
+        Destination destination = (Destination) jndiContext.lookup("/queues/poyantesting");
 
         // MessageProducer is used for sending messages (as opposed
         // to MessageConsumer which is used for receiving them)
